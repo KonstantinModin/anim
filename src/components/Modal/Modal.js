@@ -2,11 +2,15 @@ import React from 'react';
 
 import './Modal.css';
 
-const modal = (props) => (
-    <div className="Modal">
-        <h1>A Modal</h1>
-        <button className="Button" onClick={props.closed}>Dismiss</button>
-    </div>
-);
+const modal = ({ show, closed }) => {
+    const modaClasses = ['Modal', show ? 'ModalOpen' : 'ModalClosed'];
+    
+    return (
+        <div className={modaClasses.join` `}>
+            <h1>A Modal</h1>
+            <button className="Button" onClick={closed}>Dismiss</button>
+        </div>
+    )
+};
 
 export default modal;
