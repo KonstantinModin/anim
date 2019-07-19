@@ -23,16 +23,24 @@ class App extends Component {
 
     render() {
         const { modalIsOpen, showBlock } = this.state;
-        const animationTiming = {
-            enter: 400,
-            exit: 1000
-        };
+        
         
         return (
             <div className="App">
                 <button className="Button" onClick={this.boxHandler}>Toggle</button>
                 {/* {showBlock ? <div className="Box"></div> : null} */}
-                <Transition in={showBlock} timeout={1000} mountOnEnter unmountOnExit>
+                <Transition 
+                    in={showBlock} 
+                    timeout={1000} 
+                    mountOnEnter 
+                    unmountOnExit
+                    onEnter={() => console.log('onEnter')}
+                    onEntering={() => console.log('onEntering')}
+                    onEntered={() => console.log('onEntered')}
+                    onExit={() => console.log('onExit')}
+                    onExiting={() => console.log('onExiting')}
+                    onExited={() => console.log('onExited')}
+                    >
                     {state => (
                         <div style={{
                             backgroundColor: 'red',
@@ -46,22 +54,7 @@ class App extends Component {
                 </Transition>
                 <hr/>
                 <h1>React Animations</h1>
-                <Transition 
-                    in={modalIsOpen} 
-                    timeout={animationTiming} 
-                    mountOnEnter 
-                    unmountOnExit
-                    onEnter={() => console.log('onEnter')}
-                    onEntering={() => console.log('onEntering')}
-                    onEntered={() => console.log('onEntered')}
-                    onExit={() => console.log('onExit')}
-                    onExiting={() => console.log('onExiting')}
-                    onExited={() => console.log('onExited')}
-                    >
-                    {state => (
-                        <Modal show={state} closed={() => this.handleModal(false)} />
-                    )}
-                </Transition>
+                <Modal show={modalIsOpen} closed={() => this.handleModal(false)} />                
                 <Backdrop show={modalIsOpen}/>
                 <button className="Button" onClick={() => this.handleModal(true)}>Open Modal</button>
                 <h3>Animating Lists</h3>
