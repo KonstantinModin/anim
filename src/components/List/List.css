@@ -20,3 +20,24 @@
 .ListItem:active {
     background-color: #ccc;
 }
+
+.LI-enter {
+    position: absolute;
+    left: -100%;
+}
+
+.LI-enter-active {
+    position: absolute;
+    transition: left 0.4s ease-out;
+    left: 0;
+}
+.LI-exit {
+    position: absolute;
+    left: 0;
+}
+
+.LI-exit-active {
+    position: absolute;
+    transition: left 0.4s ease-out;
+    left: 100%;
+}

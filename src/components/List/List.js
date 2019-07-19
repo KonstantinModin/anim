@@ -1,43 +1,40 @@
 import React, { Component } from 'react';
-
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './List.css';
 
 class List extends Component {
     state = {
-        items: [1, 2, 3]
+        items: [[1, Math.random()], [2, Math.random()], [3, Math.random()]]
     }
 
     addItemHandler = () => {
-        this.setState((prevState) => {
-            return {
-                items: prevState.items.concat(prevState.items.length + 1)
-            };
+        this.setState(state => {
+            return { items: [...state.items, [state.items.length + 1, Math.random()]] }
         });
     }
 
-    removeItemHandler = (selIndex) => {
-        this.setState((prevState) => {
-            return {
-                items: prevState.items.filter((item, index) => index !== selIndex)
-            };
+    removeItemHandler = (key) => {
+        this.setState(state => {
+            return { items: state.items.filter(item => item[1] !== key) }
         });
     }
 
-    render () {
-        const listItems = this.state.items.map( (item, index) => (
-            <li 
-                key={index}
+    render() {
+        const listItems = this.state.items.map(([value, key]) => (
+            <CSSTransition  timeout={400} key={key} classNames="LI">
+            <li                 
                 className="ListItem" 
-                onClick={() => this.removeItemHandler(index)}>{item}</li>
-        ) );
+                onClick={() => this.removeItemHandler(key)}>{value}</li>
+            </CSSTransition>
+        ));
 
         return (
             <div>
                 <button className="Button" onClick={this.addItemHandler}>Add Item</button>
                 <p>Click Item to Remove.</p>
-                <ul className="List">
+                <TransitionGroup component="ul" className="List">
                     {listItems}
-                </ul>
+                </TransitionGroup>
             </div>
         );
     }
