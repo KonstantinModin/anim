@@ -22,13 +22,11 @@ class App extends Component {
 
 
     render() {
-        const { modalIsOpen, showBlock } = this.state;
-        
+        const { modalIsOpen, showBlock } = this.state;        
         
         return (
             <div className="App">
-                <button className="Button" onClick={this.boxHandler}>Toggle</button>
-                {/* {showBlock ? <div className="Box"></div> : null} */}
+                <button className="Button" onClick={this.boxHandler}>Toggle</button>                
                 <Transition 
                     in={showBlock} 
                     timeout={1000} 
